@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -36,5 +38,11 @@ public class UserService {
         User user=userDao.updateUser(id,name);
         log.info("UserService-updateUserService,修改用户完成");
         return user;
+    }
+
+    public List<User> findAllUserService(){
+        List<User> users=userDao.findall();
+        log.info("UserService-updateUserService,查询所有用户完成");
+        return users;
     }
 }

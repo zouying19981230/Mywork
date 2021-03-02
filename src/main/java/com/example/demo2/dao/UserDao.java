@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -46,5 +47,11 @@ public class UserDao {
         User user=userOptional.get();
         log.info("UserService-findUser,通过ID查询用户，用户名为：{}",user.getName(),"用户年龄为：{}",user.getAge());
         return user;
+    }
+    public List<User> findall(){
+        log.info("UserDao-all查询所有学生");
+        List<User> users=userJpa.findAll();
+        log.info("查询所有学生完成");
+        return users;
     }
 }

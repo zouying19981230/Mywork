@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello springboot</title>
+</head>
+<body>
+
+<form method="post" action="">
+    <ul>
+        <li><label>用户ID</label><input type="number" id="id"></li>
+        <li><label>用户姓名</label><input type="text" id="name"></li>
+        <li><label>用户年龄</label><input type="number" id="age"></li>
+    </ul>
+    <button type="button" id="add" >添加用户</button>
+    <button type="button" id="delete">删除用户</button>
+    <button type="button" id="select">根据ID查找用户</button>
+    <button type="button" id="update">修改用户</button>
+    <button type="button" id="all">查找所有用户</button>
+</form>
+<div id="show">
+
+</div>
+<script src="bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#add").bind("click",function () {
+        console.log("123");
+        var name=$("#name").val();
+        var age=$("#age").val();
+        location.href="add.action/"+"name="+name+"/age="+age;
+    });
+
+    $("#delete").bind("click",function () {
+        var id=$("#id").val();
+        location.href="delete/"+id;
+    })
+
+    $("#select").bind("click",function () {
+        var id=$("#id").val();
+        location.href="select/"+id;
+    })
+
+    $("#all").bind("click",function () {
+        $.ajax({
+            type:"GET",
+            url:"all",
+            dataType:"JSON",
+
+            success:function (json,status) {
+                var str="";
+                for (var i=0;i<json.length;i++){
+                    str+=
+                        "<tr id=\"tr\">\n" +
+                        "\t<td width='30px'>"+json[i].id+"</td>\n" +
+                        "\t<td>"+json[i].name+"</td>\n" +
+                        "\t<td>"+json[i].old+"</td>\n" +"</tr>"
+                }
+                $("#show").html(str);
+            }
+        })
+    })
+
+    $("#update").bind("click",function () {
+        var id=$("#id").val();
+        var name=$("#name").val();
+        location.href="update/"+id+"/"+name;
+    });
+</script>
+
+</body>
+</html>
